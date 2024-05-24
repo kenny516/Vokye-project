@@ -1,19 +1,12 @@
 package util;
 
-import model.Depense;
-import model.Vente;
-import model.Prix;
+import Model.Vente;
+import Model.Prix;
 
-import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.List;
-import java.util.ArrayList;
-
-import bdd.annotation.Colonne;
-import bdd.annotation.Table;
 
 public class Function {
     //function pour depense

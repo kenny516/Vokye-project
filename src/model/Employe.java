@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bdd.GenBDD;
+import bdd.annotation.Colonne;
 
-public class Employe extends GenBDD{
+public class Employe extends GenBDD {
     @Colonne(nom = "id_employee")
     private int idEmployee;
 
@@ -48,7 +49,7 @@ public class Employe extends GenBDD{
     @Colonne(nom = "chiffre_affaire")
     private Double chiffreAffaires;
 
-    
+
     public int getidEmployee() {
         return idEmployee;
     }
@@ -220,7 +221,7 @@ public class Employe extends GenBDD{
         }
         return list;
     }
-    
+
 
     public Employe getInfoEmployeById(Connection connection, int idEmployee) throws SQLException {
         Employe employe = null;
@@ -262,14 +263,26 @@ public class Employe extends GenBDD{
     }
 
     public void insertEmploye(Connection connection) throws SQLException {
-        this.save(connection);
+        try {
+            this.save(connection);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void updateEmploye(Connection connection) throws SQLException {
-        this.update(connection, this.idEmployee);
+        try {
+            this.update(connection, this.idEmployee);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void deleteEmploye(Connection connection) throws SQLException {
-        this.supp(connection, this.idEmployee);
+        try {
+            this.supp(connection, this.idEmployee);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

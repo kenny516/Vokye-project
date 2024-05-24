@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import bdd.annotation.*;
 import bdd.*;
