@@ -54,7 +54,7 @@ public class Employe extends GenBDD {
         return idEmployee;
     }
 
-    void setidEmployee(int idEmployee) {
+    public void setidEmployee(int idEmployee) {
         this.idEmployee = idEmployee;
     }
 
@@ -66,7 +66,7 @@ public class Employe extends GenBDD {
         return idTypeEmployee;
     }
 
-    void setIdTypeEmployee(int idTypeEmployee) {
+    public void setIdTypeEmployee(int idTypeEmployee) {
         this.idTypeEmployee = idTypeEmployee;
     }
 
@@ -78,7 +78,7 @@ public class Employe extends GenBDD {
         return numVente;
     }
 
-    void setNumVente(int numVente) {
+    public void setNumVente(int numVente) {
         this.numVente = numVente;
     }
 
@@ -90,7 +90,7 @@ public class Employe extends GenBDD {
         return nom;
     }
 
-    void setnom(String nom) {
+    public void setnom(String nom) {
         this.nom = nom;
     }
 
@@ -98,7 +98,7 @@ public class Employe extends GenBDD {
         return prenom;
     }
 
-    void setPrenom(String prenom) {
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
@@ -106,7 +106,7 @@ public class Employe extends GenBDD {
         return dateDeNaissance;
     }
 
-    void setDateDeNaissance(Timestamp dateDeNaissance) {
+    public void setDateDeNaissance(Timestamp dateDeNaissance) {
         this.dateDeNaissance = dateDeNaissance;
     }
 
@@ -118,7 +118,7 @@ public class Employe extends GenBDD {
         return numTel;
     }
 
-    void setNumTel(int numTel) {
+    public void setNumTel(int numTel) {
         this.numTel = numTel;
     }
 
@@ -130,7 +130,7 @@ public class Employe extends GenBDD {
         return chiffreAffaires;
     }
 
-    void setChiffreAffaires(Double chiffreAffaires) {
+    public void setChiffreAffaires(Double chiffreAffaires) {
         this.chiffreAffaires = chiffreAffaires;
     }
 
@@ -142,7 +142,7 @@ public class Employe extends GenBDD {
         return dateEntrer;
     }
 
-    void setdateEntrer(Timestamp dateEntrer) {
+    public void setdateEntrer(Timestamp dateEntrer) {
         this.dateEntrer = dateEntrer;
     }
 
@@ -154,7 +154,7 @@ public class Employe extends GenBDD {
         return dateFin;
     }
 
-    void setDateFin(Timestamp dateFin) {
+    public void setDateFin(Timestamp dateFin) {
         this.dateFin = dateFin;
     }
 
@@ -223,7 +223,7 @@ public class Employe extends GenBDD {
     }
 
 
-    public Employe getInfoEmployeById(Connection connection, int idEmployee) throws SQLException {
+    public static Employe getInfoEmployeById(Connection connection, int idEmployee) throws SQLException {
         Employe employe = null;
         String query = "SELECT * FROM employe WHERE id_employee = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
