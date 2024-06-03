@@ -2,6 +2,7 @@
 CREATE DATABASE voke;
 
 -- Makany .\c voke;
+\c voke;
 
 --Creation table :
 
@@ -64,6 +65,7 @@ CREATE TABLE achat_ingredient(
     id_achat_Ingredient SERIAL PRIMARY KEY,
     id_ingredient INT , 
     prix NUMERIC(10,2),
+    quantite INTEGER,
     data_achat DATE,
     FOREIGN KEY (id_ingredient) REFERENCES Ingredient(id_ingredient)
 );
@@ -72,6 +74,7 @@ CREATE TABLE achat_utilitaire(
     id_achat_utilitaire SERIAL PRIMARY KEY,
     id_utilitaire INT,
     prix NUMERIC(10,2),
+    quantite INTEGER,
     data_achat DATE,
     FOREIGN KEY (id_utilitaire) REFERENCES Utilitaire(id_utilitaire)
 );
@@ -129,5 +132,15 @@ CREATE TABLE point_vente(
     FOREIGN KEY (id_chariot) REFERENCES chariot(id_chariot)
 );
 
+--For the equipment and the state
+CREATE TABLE Etat(
+    id_etat SERIAL PRIMARY KEY,
+    nom VARCHAR(50)
+);
 
-
+CREATE TABLE Etat_utilitaire(
+    id_etat_utilitaire SERIAL PRIMARY KEY,
+    id_utilitaire INTEGER,
+    id_etat INTEGER,
+    date_etat_utilitaire DATE
+);

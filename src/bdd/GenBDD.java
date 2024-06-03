@@ -239,7 +239,7 @@ public class GenBDD {
                 }
             }
 
-            queryBuilder.append(" WHERE id" + nameTable + " = ?");
+            queryBuilder.append(" WHERE id_" + nameTable + " = ?");
             String query = queryBuilder.toString();
 
             conn = connex;
