@@ -8,8 +8,7 @@ public class Connexion {
     Connection connex; 
     public Connection getConnection() throws Exception{
         try{
-            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/nom_projet","nom_database","mdp");
-            return connection;
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/voke","postgres","2004");
         }
         catch(SQLException e){
             throw e;
