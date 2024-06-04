@@ -16,9 +16,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Employe;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 @WebServlet(name = "InsertionEmployeServlet", urlPatterns = { "/insertion-employe" })
 public class InsertionEmployeServlet extends HttpServlet {
+
+    private Gson gson;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+        this.gson = (Gson) context.getBean("gson");
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,7 +39,6 @@ public class InsertionEmployeServlet extends HttpServlet {
 
         try (Connection connection = ConnectionPostgres.getConnectionPostgres()) {
             List<Employe> employes = new Employe().getListeEmployes(connection, null);
-            Gson gson = new Gson();
             String employesJson = gson.toJson(employes);
 
             try (PrintWriter out = response.getWriter()) {
