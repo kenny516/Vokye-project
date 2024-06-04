@@ -1,14 +1,13 @@
-package Controller;
+package com.mg.vokye.Controller;
 
 
-import bdd.Connexion;
+import com.mg.vokye.bdd.Connexion;
 import com.google.gson.Gson;
-import model.Vente;
+import com.mg.vokye.model.Vente;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
 

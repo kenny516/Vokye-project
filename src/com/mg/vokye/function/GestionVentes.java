@@ -1,4 +1,4 @@
-package function;
+package com.mg.vokye.function;
 
 import java.sql.*;
 

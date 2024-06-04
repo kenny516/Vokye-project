@@ -1,15 +1,15 @@
-package bdd;
+package com.mg.vokye.bdd;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import bdd.annotation.*;
+import com.mg.vokye.bdd.annotation.*;
 import java.lang.reflect.Field;
 
 public class GenBDD {
 
-    // function for the insertion
+    // com.mg.vokye.function for the insertion
     public void save(Connection connex) throws Exception {
         String nameTable = this.getClass().getAnnotation(Table.class).nom();
         Object[] insertData = this.prepaInsert();

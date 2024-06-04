@@ -1,8 +1,8 @@
-package model;
+package com.mg.vokye.model;
 
-import bdd.GenBDD;
-import bdd.annotation.Colonne;
-import bdd.annotation.Table;
+import com.mg.vokye.bdd.GenBDD;
+import com.mg.vokye.bdd.annotation.Colonne;
+import com.mg.vokye.bdd.annotation.Table;
 
 import java.time.LocalDate;
 

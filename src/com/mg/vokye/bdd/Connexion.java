@@ -1,4 +1,4 @@
-package bdd;
+package com.mg.vokye.bdd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

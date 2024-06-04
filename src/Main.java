@@ -1,5 +1,5 @@
-import bdd.Connexion;
-import model.Vente;
+import com.mg.vokye.bdd.Connexion;
+import com.mg.vokye.model.Vente;
 
 import java.util.List;
 

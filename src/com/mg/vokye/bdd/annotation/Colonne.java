@@ -1,4 +1,4 @@
-package bdd.annotation;
+package com.mg.vokye.bdd.annotation;
 import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
