@@ -1,22 +1,20 @@
 package com.mg.vokye.Controller;
 
-
-import com.mg.vokye.bdd.Connexion;
 import com.google.gson.Gson;
+import com.mg.vokye.bdd.Connexion;
 import com.mg.vokye.model.Vente;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/voke")
 public class VenteController {
     Connexion connexion = new Connexion();
 
-
-    @GetMapping("insert_vente")
+    @GetMapping("/insert_vente")
+    @ResponseBody
     public String save(@RequestParam("id_chariot") int id_chariot,
                        @RequestParam("id_produit") int id_produit,
                        @RequestParam("quantite") int quantite,
@@ -27,19 +25,20 @@ public class VenteController {
         vente.setId_produit(id_produit);
         vente.setQuantite(quantite);
         vente.setDate_vente(date_vente);
-        try{
+        try {
             vente.save(connexion.getConnection());
-            return "succes";
-        }catch (Exception ignored){
+            return "success";
+        } catch (Exception ignored) {
             return "failed";
         }
     }
-    @GetMapping("getVentes")
+
+    @GetMapping("/getVentes")
+    @ResponseBody
     public String getVentes() throws Exception {
         Vente vente = new Vente();
         List<Object> ventes = vente.getAll(connexion.getConnection());
         Gson parseJson = new Gson();
-        return parseJson.toJson(ventes);
+        return parseJson.toJson(((Vente)ventes.get(0)).getQuantite());
     }
-
 }
