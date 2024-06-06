@@ -1,0 +1,5 @@
+Nanao modification tanaty base zah
+    table employe:
+        -nanampy colonne motDePasse
+    
+    namorona vue ray zah vue_employe_type
