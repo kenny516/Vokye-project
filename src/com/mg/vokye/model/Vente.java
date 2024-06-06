@@ -4,7 +4,7 @@ import com.mg.vokye.bdd.GenBDD;
 import com.mg.vokye.bdd.annotation.Colonne;
 import com.mg.vokye.bdd.annotation.Table;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Table(nom = "vente")
 public class Vente extends GenBDD {
@@ -65,14 +65,9 @@ public class Vente extends GenBDD {
         return date_vente;
     }
 
-    public void setDate_vente(Object date_vente) {
-        if (date_vente instanceof java.sql.Date) {
-            this.date_vente = new java.util.Date(((java.sql.Date) date_vente).getTime());
-        } else if (date_vente instanceof java.util.Date) {
-            this.date_vente = (java.util.Date) date_vente;
-        } else {
-            throw new IllegalArgumentException("Unsupported date type");
-        }
+    public void setDate_vente(Date date_vente) {
+        this.date_vente =  date_vente;
+
     }
 
 }

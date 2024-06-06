@@ -1,7 +1,6 @@
 package com.mg.vokye.bdd;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,8 +153,8 @@ public class GenBDD {
                             field.set(instance, res.getString(columnName));
                         } else if (field.getType() == Date.class) {
                             field.set(instance, res.getDate(columnName));
-                        }else if (field.getType() == LocalDate.class){
-                            field.set(instance,res.getDate(columnName).toLocalDate());
+                        }else if (field.getType() == java.util.Date.class) {
+                            field.set(instance, (java.util.Date)res.getDate(columnName));
                         }
                     }
                 }
