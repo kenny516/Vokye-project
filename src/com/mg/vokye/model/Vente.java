@@ -5,6 +5,7 @@ import com.mg.vokye.bdd.annotation.Colonne;
 import com.mg.vokye.bdd.annotation.Table;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Table(nom = "vente")
 public class Vente extends GenBDD {
@@ -17,7 +18,7 @@ public class Vente extends GenBDD {
     @Colonne(nom = "quantite")
     int quantite;
     @Colonne(nom = "date_vente")
-    LocalDate date_vente;
+    Date date_vente;
 
     public int getId_vente() {
         return id_vente;
@@ -51,11 +52,11 @@ public class Vente extends GenBDD {
         this.quantite = quantite;
     }
 
-    public LocalDate getDate_vente() {
+    public Date getDate_vente() {
         return date_vente;
     }
 
-    public void setDate_vente(LocalDate date_vente) {
+    public void setDate_vente(Date date_vente) {
         this.date_vente = date_vente;
     }
 }
