@@ -4,12 +4,14 @@ import com.mg.vokye.bdd.GenBDD;
 import com.mg.vokye.bdd.annotation.Colonne;
 import com.mg.vokye.bdd.annotation.Table;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 @Table(nom = "vente")
 public class Vente extends GenBDD {
     @Colonne(nom = "id_vente")
     int id_vente;
+    @Colonne(nom = "id_point_vente")
+    int id_point_vente;
     @Colonne(nom = "id_chariot")
     int id_chariot;
     @Colonne(nom = "id_produit")
@@ -17,7 +19,7 @@ public class Vente extends GenBDD {
     @Colonne(nom = "quantite")
     int quantite;
     @Colonne(nom = "date_vente")
-    LocalDate date_vente;
+    Date date_vente;
 
     public int getId_vente() {
         return id_vente;
@@ -25,6 +27,14 @@ public class Vente extends GenBDD {
 
     public void setId_vente(int id_vente) {
         this.id_vente = id_vente;
+    }
+
+    public int getId_point_vente() {
+        return id_point_vente;
+    }
+
+    public void setId_point_vente(int id_point_vente) {
+        this.id_point_vente = id_point_vente;
     }
 
     public int getId_chariot() {
@@ -51,11 +61,13 @@ public class Vente extends GenBDD {
         this.quantite = quantite;
     }
 
-    public LocalDate getDate_vente() {
+    public Date getDate_vente() {
         return date_vente;
     }
 
-    public void setDate_vente(LocalDate date_vente) {
-        this.date_vente = date_vente;
+    public void setDate_vente(Date date_vente) {
+        this.date_vente =  date_vente;
+
     }
+
 }
