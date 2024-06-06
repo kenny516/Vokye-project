@@ -119,15 +119,16 @@ CREATE TABLE vente (
     id_vente SERIAL PRIMARY KEY,
     id_chariot INT,
     id_produit INT,
+    id_point_vente INT,
     quantite INT,
     date_vente DATE,
     FOREIGN KEY (id_produit) REFERENCES Produit(id_produit),
-    FOREIGN KEY (id_chariot) REFERENCES chariot(id_chariot)
+    FOREIGN KEY (id_chariot) REFERENCES chariot(id_chariot),
+    FOREIGN KEY (id_point_vente) REFERENCES point_vente(id_point_vente)
 );
 
 CREATE TABLE point_vente(
     id_point_vente SERIAL PRIMARY KEY,
-    id_chariot INT,
     localisation VARCHAR(200),
     FOREIGN KEY (id_chariot) REFERENCES chariot(id_chariot)
 );
