@@ -44,7 +44,7 @@ app.controller('MainController', function($scope, $http) {
     };
 
 
-    // Load the categories, rallies, and speciales on page load
+    // Load the ze tinao eto
     $scope.loadData("vStockIngredient");
 });
 

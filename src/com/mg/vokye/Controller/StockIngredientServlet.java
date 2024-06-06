@@ -6,7 +6,9 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.mg.vokye.bdd.Connexion;
+import com.mg.vokye.function.Function;
 import com.mg.vokye.model.Ingredient;
+import com.mg.vokye.model.Produit;
 import com.mg.vokye.model.StockIngredient;
 
 import jakarta.servlet.ServletException;
@@ -43,6 +45,11 @@ public class StockIngredientServlet extends HttpServlet {
                     case "vStockIngredient":
                         List<Ingredient> listIngredients = stockIngredient.check_stock(c);
                         jsonData = new Gson().toJson(listIngredients);
+                        break;
+                    
+                    case "listeProduit":
+                        List<Produit> listProduits = Function.getListProduit();
+                        jsonData = new Gson().toJson(listProduits);
                         break;
                     
                         // afaka anapina 

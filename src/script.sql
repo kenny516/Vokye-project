@@ -19,10 +19,12 @@ CREATE TABLE employee(
     id_type_emp int,
     nom VARCHAR(50),
     prenom VARCHAR(50),
+    motDePasse password,
     Date_entrer DATE,
     Date_fin DATE,
     FOREIGN KEY (id_type_emp) REFERENCES type_emp(id_type_emp)
 );
+
 
 -- Stock -- 
 ---- All that will be used ----
@@ -144,3 +146,21 @@ CREATE TABLE Etat_utilitaire(
     id_etat INTEGER,
     date_etat_utilitaire DATE
 );
+
+
+-- vues
+CREATE OR REPLACE VIEW vue_employe_type AS
+SELECT 
+    e.id_employee,
+    e.nom,
+    e.prenom,
+    e.Date_entrer,
+    e.motDePasse,
+    e.Date_fin,
+    t.Designation,
+    t.salaire_base,
+    t.Pourcentage
+FROM 
+    employee e
+JOIN 
+    type_emp t ON e.id_type_emp = t.id_type_emp;
