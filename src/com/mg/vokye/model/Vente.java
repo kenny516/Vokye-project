@@ -9,11 +9,11 @@ import java.sql.Date;
 @Table(nom = "vente")
 public class Vente extends GenBDD {
     @Colonne(nom = "id_vente")
-    int id_vente;
+    Integer id_vente;
     @Colonne(nom = "id_point_vente")
-    int id_point_vente;
+    Integer id_point_vente;
     @Colonne(nom = "id_chariot")
-    int id_chariot;
+    Integer id_chariot;
     @Colonne(nom = "id_produit")
     int id_produit;
     @Colonne(nom = "quantite")
