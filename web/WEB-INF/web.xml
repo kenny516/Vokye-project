@@ -5,6 +5,25 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <servlet>
+        <servlet-name>StockIngredientServlet</servlet-name>
+        <servlet-class>com.mg.vokye.Controller.StockIngredientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StockIngredientServlet</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ServletVente</servlet-name>
+        <servlet-class>com.mg.vokye.Controller.ServletVente</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletVente</servlet-name>
+        <url-pattern>/vente</url-pattern>
+    </servlet-mapping>
+
+
 
 
 </web-app>

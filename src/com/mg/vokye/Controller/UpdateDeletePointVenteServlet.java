@@ -4,6 +4,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.io.Serial;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -12,6 +13,7 @@ import com.mg.vokye.model.*;
 
 @WebServlet(name = "UpdateDeletePointVenteServlet" , urlPatterns = {"/updateDeletePointVenteServlet"})
 public class UpdateDeletePointVenteServlet extends HttpServlet {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
