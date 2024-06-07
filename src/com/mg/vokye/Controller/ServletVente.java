@@ -22,7 +22,7 @@ public class ServletVente extends HttpServlet {
     private final Connexion connexion = new Connexion();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)  {
         String action = req.getParameter("action");
 
         try (Connection connection = connexion.getConnection()) {
@@ -80,9 +80,9 @@ public class ServletVente extends HttpServlet {
 
     private void handleCreate(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            int id_produit = Integer.parseInt(req.getParameter("id_produit"));
-            int id_chariot = Integer.parseInt(req.getParameter("id_chariot"));
             int id_point_vente = Integer.parseInt(req.getParameter("id_point_vente"));
+            int id_chariot = Integer.parseInt(req.getParameter("id_chariot"));
+            int id_produit = Integer.parseInt(req.getParameter("id_produit"));
             int quantite = Integer.parseInt(req.getParameter("quantite"));
 
             String dateString = req.getParameter("date_vente");
@@ -122,30 +122,33 @@ public class ServletVente extends HttpServlet {
 
     private void handleUpdate(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            int id_vente = Integer.parseInt(req.getParameter("id_vente"));
+            int id_point_vente = Integer.parseInt(req.getParameter("id_point_vente"));
             int id_chariot = Integer.parseInt(req.getParameter("id_chariot"));
             int id_produit = Integer.parseInt(req.getParameter("id_produit"));
             int quantite = Integer.parseInt(req.getParameter("quantite"));
 
+
             String dateString = req.getParameter("date_vente");
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            Date date_vente;
+            java.util.Date utilDate;
 
             try {
-                date_vente = (Date) formatter.parse(dateString);
+                utilDate = formatter.parse(dateString);
             } catch (ParseException e) {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 resp.getWriter().write("Invalid date format. Please use yyyy-MM-dd.");
                 return;
             }
 
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
             try (Connection connection = connexion.getConnection()) {
                 Vente updated_vente = new Vente();
-                updated_vente.setId_vente(id_vente);
-                updated_vente.setId_chariot(id_chariot);
                 updated_vente.setId_produit(id_produit);
+                updated_vente.setId_point_vente(id_point_vente);
+                updated_vente.setId_chariot(id_chariot);
                 updated_vente.setQuantite(quantite);
-                updated_vente.setDate_vente(date_vente);
+                updated_vente.setDate_vente(sqlDate);
                 updated_vente.update(connection,updated_vente.getId_vente());
 
                 resp.setStatus(HttpServletResponse.SC_OK);

@@ -15,9 +15,9 @@ public class Vente extends GenBDD {
     @Colonne(nom = "id_chariot")
     Integer id_chariot;
     @Colonne(nom = "id_produit")
-    int id_produit;
+    Integer id_produit;
     @Colonne(nom = "quantite")
-    int quantite;
+    Integer quantite;
     @Colonne(nom = "date_vente")
     Date date_vente;
 
