@@ -65,9 +65,6 @@ public class Vente extends GenBDD {
         return date_vente;
     }
 
-    public void setDate_vente(Date date_vente) {
-        this.date_vente =  date_vente;
-
-    }
+    public void setDate_vente(Date date_vente) {this.date_vente =  date_vente;}
 
 }

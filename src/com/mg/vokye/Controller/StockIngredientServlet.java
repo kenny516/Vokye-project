@@ -42,20 +42,18 @@ public class StockIngredientServlet extends HttpServlet {
                 String jsonData = null;
                 StockIngredient stockIngredient = new StockIngredient();
                 switch (viewName) {
-                    case "vStockIngredient":
+                    case "vStockIngredient" -> {
                         List<Ingredient> listIngredients = stockIngredient.check_stock(c);
                         jsonData = new Gson().toJson(listIngredients);
-                        break;
-                    
-                    case "listeProduit":
+                    }
+                    case "listeProduit" -> {
                         List<Produit> listProduits = Function.getListProduit();
                         jsonData = new Gson().toJson(listProduits);
-                        break;
-                    
-                        // afaka anapina 
+                    }
 
-                    default:
-                        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    // afaka anapina
+
+                    default -> response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
                 if (jsonData != null) {
                     response.setContentType("application/json");

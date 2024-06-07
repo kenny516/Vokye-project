@@ -153,8 +153,6 @@ public class GenBDD {
                             field.set(instance, res.getString(columnName));
                         } else if (field.getType() == Date.class) {
                             field.set(instance, res.getDate(columnName));
-                        }else if (field.getType() == java.util.Date.class) {
-                            field.set(instance, (java.util.Date)res.getDate(columnName));
                         }
                     }
                 }

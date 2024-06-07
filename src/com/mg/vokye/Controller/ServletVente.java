@@ -6,7 +6,6 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializer;
 import com.mg.vokye.bdd.Connexion;
 import com.mg.vokye.model.Vente;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,7 +21,7 @@ public class ServletVente extends HttpServlet {
     private final Connexion connexion = new Connexion();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)  {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         String action = req.getParameter("action");
 
         try (Connection connection = connexion.getConnection()) {
@@ -63,7 +62,7 @@ public class ServletVente extends HttpServlet {
 
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String action = req.getParameter("action");
 
         if ("create".equalsIgnoreCase(action)) {
@@ -74,7 +73,7 @@ public class ServletVente extends HttpServlet {
             handleDelete(req, resp);
         } else {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            resp.getWriter().write("Invalid action for POST method");
+            resp.getWriter().write("Invalid action for POST method ");
         }
     }
 
@@ -115,7 +114,7 @@ public class ServletVente extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().write("Insert failed " + e.getMessage()+e.getCause());
+            resp.getWriter().write("Insert failed " + e.getMessage() + e.getCause());
         }
     }
 
@@ -149,7 +148,7 @@ public class ServletVente extends HttpServlet {
                 updated_vente.setId_chariot(id_chariot);
                 updated_vente.setQuantite(quantite);
                 updated_vente.setDate_vente(sqlDate);
-                updated_vente.update(connection,updated_vente.getId_vente());
+                updated_vente.update(connection, updated_vente.getId_vente());
 
                 resp.setStatus(HttpServletResponse.SC_OK);
                 resp.getWriter().write("Update successful");
@@ -158,7 +157,7 @@ public class ServletVente extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().write("Update failed");
+            resp.getWriter().write("Update failed " + e.getMessage() + e.getCause());
         }
     }
 
@@ -168,7 +167,7 @@ public class ServletVente extends HttpServlet {
 
             try (Connection connection = connexion.getConnection()) {
                 Vente vente = new Vente();
-                vente.supp(connection,id_vente);
+                vente.supp(connection, id_vente);
                 resp.setStatus(HttpServletResponse.SC_OK);
                 resp.getWriter().write("Delete successful");
             }
@@ -176,12 +175,8 @@ public class ServletVente extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            resp.getWriter().write("Delete failed");
+            resp.getWriter().write("Delete failed " + e.getMessage() + e.getCause());
         }
     }
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-    }
 }
