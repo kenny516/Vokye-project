@@ -120,7 +120,7 @@ public class Function {
         }
 
         // Use PreparedStatement to prevent SQL injection and handle date parameters
-        String sql = "SELECT id_prix FROM depense WHERE date_depense > ? AND date_depense < ?";
+        String sql = "SELECT prix FROM depense WHERE date_depense > ? AND date_depense < ?";
 
         try (PreparedStatement stmt = connex.prepareStatement(sql)) {
             stmt.setDate(1, date_first);
@@ -128,7 +128,7 @@ public class Function {
 
             try (ResultSet res = stmt.executeQuery()) {
                 while (res.next()) {
-                    total += res.getDouble("id_prix");
+                    total += res.getDouble("prix");
                 }
             }
         } catch (Exception e) {
@@ -163,7 +163,7 @@ public class Function {
 
             try (ResultSet res = stmt.executeQuery()) {
                 while (res.next()) {
-                    double prixProduit = getPrixProduit(res.getDouble("id_produit"));
+                    double prixProduit = getPrixProduit(connex,res.getInt("id_produit"));
                     int quantite = res.getInt("quantite");
                     total += prixProduit * quantite;
                 }
@@ -189,7 +189,7 @@ public class Function {
     public double chiffre_affaire(Connection connex, Date d1, Date d2) throws Exception {
         double chiffre_affaire = 0;
         try {
-            chiffre_affaire = this.total_depense(connex, d1, d2) - this.total_vente(connex, d1, d2);
+            chiffre_affaire =  this.total_vente(connex, d1, d2) - this.total_depense(connex, d1, d2);
         } catch (Exception e) {
             throw e;
         }
