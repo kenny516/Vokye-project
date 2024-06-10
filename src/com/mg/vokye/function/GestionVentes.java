@@ -27,6 +27,24 @@ public class GestionVentes {
         return somme;
     }
 
+    public double somme_vente_by_date(Date date_vente) {
+        double somme = 0;
+        try {
+            String sql = "SELECT SUM(prix * quantite) FROM vente JOIN Produit ON vente.id_produit = Produit.id_produit WHERE id_employee = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id_employee);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                somme = rs.getDouble(1);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return somme;
+    }
+
     public double somme_perte_vendeur(int id_employee) {
         double somme = 0;
         try {
