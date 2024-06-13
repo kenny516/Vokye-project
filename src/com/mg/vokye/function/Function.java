@@ -13,65 +13,34 @@ import com.mg.vokye.model.Produit;
 
 // responsable clientele
 public class Function {
-    public static String check_login(String nom, String prenom, String password) throws Exception {
+    public static boolean check_login(String email, String password) throws Exception {
         Connexion pgConnect = new Connexion();
         Connection connection = pgConnect.getConnection();
-        String designation = null;
+        // designation soit responsable cliente ou admin
         
-        String query = "SELECT designation FROM vue_employe_type WHERE nom = ? AND prenom = ? AND motDePasse = ?";
+        // La requête SQL utilise des placeholders pour les paramètres email et motDePasse
+        String query = "SELECT * FROM vue_employe_type WHERE (designation = 'responsable cliente' OR designation = 'admin') AND email = ? AND motDePasse = sha1(?)";
         
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, nom);
-            stmt.setString(2, prenom);
-            stmt.setString(3, password);           
+            stmt.setString(1, email);
+            stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     // L'utilisateur existe, récupérer la désignation
-                    designation = rs.getString("Designation");
+                    return true;
                 }
             }
         } catch (SQLException e) {
             // Gérez les exceptions SQL ici
             e.printStackTrace();
-            throw new Exception("Database query error", e);
+            return false;
         } finally {
-            // Fermez la connexion à la base de données
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            connection.close();
         }
-        return designation;
+        return false;
     }
     
-
-    public static int getNombreProduit() throws Exception {
-        Connexion pgConnect = new Connexion();
-        int count = 0;
-        Connection connection = pgConnect.getConnection();
-    
-        String sql = "select count(*) from produit";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        ResultSet resultSet = preparedStatement.executeQuery();
-    
-        if (resultSet.next()) {
-            count = resultSet.getInt(1);
-        }
-    
-        // Fermer les ressources
-        resultSet.close();
-        preparedStatement.close();
-        connection.close();
-    
-        return count;
-    }
-    
-
     public static List<Produit> getListProduit() throws Exception {
-        int k = Function.getNombreProduit();
         List<Produit> listProduit = new ArrayList<>();
         Connexion pgConnect = new Connexion();
         Connection connection = pgConnect.getConnection();

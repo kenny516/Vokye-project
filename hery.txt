@@ -3,3 +3,5 @@ Nanao modification tanaty base zah
         -nanampy colonne motDePasse
     
     namorona vue ray zah vue_employe_type
+
+Ho an ze manao insertion mot de passe dans la base donnee asina  sha1();
