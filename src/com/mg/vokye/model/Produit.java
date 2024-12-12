@@ -1,8 +1,16 @@
 package com.mg.vokye.model;
 
-public class Produit {
+import com.mg.vokye.bdd.GenBDD;
+import com.mg.vokye.bdd.annotation.Colonne;
+import com.mg.vokye.bdd.annotation.Table;
+
+@Table(nom="Produit")
+public class Produit extends GenBDD {
+    @Colonne(nom = "id_produity")
     int idProduit;
+    @Colonne(nom= "nom")
     String nomProduit;
+    @Colonne(nom = "prix")
     double prix;
 
     public Produit() {}

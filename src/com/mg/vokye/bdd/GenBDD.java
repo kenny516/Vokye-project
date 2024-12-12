@@ -65,18 +65,15 @@ public class GenBDD {
     }
 
     public void getById(Connection connex, int id) throws Exception {
-        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            connection = connex;
-
             // Obtenir le nom de la table
             String nameTable = this.getClass().getAnnotation(Table.class).nom();
 
             // Construire la requête SQL
             String query = "SELECT * FROM " + nameTable + " WHERE id_" + nameTable.toLowerCase() + " = ?";
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connex.prepareStatement(query);
             preparedStatement.setInt(1, id);
 
             // Exécuter la requête et traiter le résultat
@@ -101,7 +98,6 @@ public class GenBDD {
                         } else if (field.getType() == java.util.Date.class) {
                             field.set(this, resultSet.getDate(columnName));
                         }
-                        // Ajouter d'autres types de données si nécessaire
                     }
                 }
             }
@@ -115,9 +111,6 @@ public class GenBDD {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (connection != null) {
-                    connection.close();
-                }
             } catch (Exception ex) {
                 throw (ex);
             }
@@ -126,14 +119,12 @@ public class GenBDD {
 
     public <T> List<T> getAll(Connection connex) throws Exception {
         List<T> liste_object = new ArrayList<>();
-        Connection co = null;
         Statement state = null;
 
         try {
             String nameTable = this.getClass().getAnnotation(Table.class).nom();
-            co = connex;
             String sql = "SELECT * FROM " + nameTable;
-            state = co.createStatement();
+            state = connex.createStatement();
 
             ResultSet res = state.executeQuery(sql);
             while (res.next()) {
@@ -153,8 +144,8 @@ public class GenBDD {
                             field.set(instance, res.getString(columnName));
                         } else if (field.getType() == Date.class) {
                             field.set(instance, res.getDate(columnName));
-                        }else if (field.getType() == java.util.Date.class) {
-                            field.set(instance, (java.util.Date)res.getDate(columnName));
+                        } else if (field.getType() == java.util.Date.class) {
+                            field.set(instance, (java.util.Date) res.getDate(columnName));
                         }
                     }
                 }
@@ -166,9 +157,6 @@ public class GenBDD {
             try {
                 if (state != null) {
                     state.close();
-                }
-                if (co != null) {
-                    co.close();
                 }
             } catch (Exception ex) {
                 throw ex;
@@ -215,23 +203,22 @@ public class GenBDD {
     }
 
     public void update(Connection connex, int id) throws Exception {
-        Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {
             String nameTable = this.getClass().getAnnotation(Table.class).nom();
             StringBuilder queryBuilder = new StringBuilder("UPDATE " + nameTable + " SET ");
-
+    
             List<Object> values = new ArrayList<>();
             int index = 0;
-
+    
             for (Field field : this.getClass().getDeclaredFields()) {
                 if (field.isAnnotationPresent(Colonne.class)) {
                     Colonne colonne = field.getAnnotation(Colonne.class);
                     String columnName = colonne.nom();
-
+    
                     field.setAccessible(true);
                     Object value = field.get(this);
-
+    
                     if (index > 0) {
                         queryBuilder.append(", ");
                     }
@@ -240,14 +227,12 @@ public class GenBDD {
                     index++;
                 }
             }
-
+    
             queryBuilder.append(" WHERE id_" + nameTable + " = ?");
             String query = queryBuilder.toString();
-
-            conn = connex;
-            conn.setAutoCommit(false);
-            preparedStatement = conn.prepareStatement(query);
-
+    
+            preparedStatement = connex.prepareStatement(query);
+    
             for (int i = 0; i < values.size(); i++) {
                 Object value = values.get(i);
                 if (value instanceof Integer) {
@@ -260,15 +245,15 @@ public class GenBDD {
                     preparedStatement.setDate(i + 1, (Date) value);
                 }
             }
-
+    
             preparedStatement.setInt(values.size() + 1, id);
-
+    
             preparedStatement.executeUpdate();
-            conn.commit();
+            connex.commit();
         } catch (Exception e) {
             try {
-                if (conn != null) {
-                    conn.rollback();
+                if (connex != null) {
+                    connex.rollback();
                 }
             } catch (Exception ex) {
                 throw ex;
@@ -279,13 +264,11 @@ public class GenBDD {
                 if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-                if (conn != null) {
-                    conn.close();
-                }
             } catch (Exception e) {
                 throw e;
             }
         }
     }
+    
 
 }
